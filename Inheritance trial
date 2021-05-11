@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+class Base{
+    public:
+    Base(){cout<<"Base constructor"<<endl;}
+    ~Base(){cout<<"Base destructor"<<endl;}
+    void f1(){cout<<"Base f1"<<endl;}
+    virtual void f2(){cout<<"Base f2"<<endl;}
+    virtual void f3(int i){cout<<"Base f3: "<<i<<endl;}  
+    virtual void f4(int i){cout<<"Base f4: "<<i<<endl;}  
+    virtual void f5(){cout<<"Base f5"<<endl;}  
+
+};
+
+class Derived: public Base{
+    private:
+    void f5(){cout<<"Derived f5 showing that at runtime we can call private function of derived class as well"<<endl;}  
+    public:
+    Derived(){cout<<"Derived constructor"<<endl;}
+    ~Derived(){cout<<"Derived destructor"<<endl;}
+    void f1(){cout<<"Derived f1"<<endl;}  
+    void f2(){cout<<"Derived f2"<<endl;}
+    void f3(){cout<<"Derived f3"<<endl;}  
+};
+
+
+int main() {
+    Base b1;
+    Derived d1;
+    Base *bptr=&b1;
+    cout << "Base ptr pointing to base object"<<endl;
+    bptr->f1(); 
+    bptr->f2();
+//    bptr->f3(); gives error
+    bptr->f3(5);
+    bptr=&d1;
+    cout << "Base ptr pointing to derived object"<<endl;
+    bptr->f1(); 
+    bptr->f2();
+//    bptr->f3(); gives error
+    bptr->f3(5);
+    bptr->f5();
+    Derived d2;
+    Derived *dptr=&d2;
+    cout << "Derived ptr pointing to derived object"<<endl;
+    dptr->f1(); 
+    dptr->f2();
+    dptr->f3();
+ //   dptr->f3(5); gives error
+    dptr->f4(5);
+ //   dptr->f5(); this gives error as it is resolved at compile-time
+    
+    
+    Base *bptr_dynamic=new Derived;
+    delete bptr_dynamic; 
+    cout << "above shows menory leak--- we can put virtual ketword to base destructor in Base class";
+    
+	return 0;
+}
