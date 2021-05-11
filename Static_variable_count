@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std; 
+class Demo { 
+private: int a,b;
+public: 
+static int objectCount; 
+Demo() { a=0;b=0; objectCount++; }
+  void increase(){
+      objectCount+=1;
+  }
+ static int getCount()
+  { return objectCount; } 
+  };
+  int Demo::objectCount=0; 
+
+
+  int main() { cout<<"Initially Object Count : "<<Demo::getCount()<<endl; 
+  Demo d1,d2,d3; 
+  cout<<"Final Object Count : "<<Demo::getCount()<<endl; 
+  d3.increase();
+  cout<<"Increased Number : "<<Demo::getCount();
+  return 0; }
+    
