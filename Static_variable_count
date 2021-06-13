@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std; 
+// new changes in main
 class Demo { 
 private: int a,b;
 public: 
