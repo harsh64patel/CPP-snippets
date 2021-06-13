@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std; 
-// new changes in main
+// new changes in main branch
 class Demo { 
 private: int a,b;
 public: 
